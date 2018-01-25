@@ -15,21 +15,21 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="347.0" prefWidth="600.0">
+      <HBox prefHeight="347.0" prefWidth="600.0" fx:id="body">
          <children>
-            <AnchorPane prefHeight="347.0" prefWidth="58.0">
+            <AnchorPane prefHeight="347.0" prefWidth="58.0" fx:id="sidebarParent">
                <children>
-                  <VBox prefHeight="347.0" prefWidth="59.0">
+                  <VBox prefHeight="347.0" prefWidth="59.0" fx:id="sidebar">
                      <children>
-                        <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-                        <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-                        <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-                        <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                        <ToggleButton mnemonicParsing="false" text="Home" fx:id="home" />
+                        <ToggleButton mnemonicParsing="false" text="Search" fx:id="search" />
+                        <ToggleButton mnemonicParsing="false" text="Downloads" fx:id="download"/>
+                        <ToggleButton mnemonicParsing="false" text="Queue" fx:id="queue"/>
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="347.0" prefWidth="515.0">
+            <AnchorPane prefHeight="347.0" prefWidth="515.0" fx:id="mainParent">
                <children>
                   <GridPane prefHeight="347.0" prefWidth="538.0">
                     <columnConstraints>
@@ -46,20 +46,20 @@
             </AnchorPane>
          </children>
       </HBox>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" fx:id="playerRowOne">
         <buttons>
-            <Slider prefHeight="14.0" prefWidth="546.0" />
-            <Label prefHeight="18.0" text="Label" />
+            <Slider prefHeight="14.0" prefWidth="546.0" fx:id="seeker"/>
+            <Label prefHeight="18.0" text="Label" fx:id="duration"/>
         </buttons>
       </ButtonBar>
-      <ToolBar prefHeight="40.0" prefWidth="200.0">
+      <ToolBar prefHeight="40.0" prefWidth="200.0" fx:id="playerRowTwo">
          <items>
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+            <ToggleButton mnemonicParsing="false" text="previous" fx:id="previous" />
+            <ToggleButton mnemonicParsing="false" text="back" fx:id="moveBack" />
+            <ToggleButton mnemonicParsing="false" text="play" fx:id="playPause" />
+            <ToggleButton mnemonicParsing="false" text="forward" fx:id="moveForward"/>
+            <ToggleButton mnemonicParsing="false" text="next" fx:id="next" />
+            <ToggleButton mnemonicParsing="false" text="add" fx:id="addToPlaylist" />
          </items>
       </ToolBar>
    </children>

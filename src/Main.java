@@ -1,15 +1,14 @@
+import fxml.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sun.audio.AudioPlayer;
 
-import javax.sound.sampled.AudioInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Main extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -40,8 +39,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VBox vBox = FXMLLoader.load(getClass().getResource("fxml/home.fxml"));
-        Scene s = new Scene(vBox,800,500);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/home.fxml"));
+        VBox vBox = loader.load();
+//        AnchorPane pane = loader.load();
+        Scene s = new Scene(vBox,800,450);
         primaryStage.setTitle("JPod");
         primaryStage.setScene(s);
         primaryStage.show();
