@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
         URL url = null;
         try {
-            url = new URL("https://rss.art19.com/masters-of-scale");
+            url = new URL("https://www.npr.org/rss/podcast.php?id=510313");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -33,13 +34,15 @@ public class Main extends Application {
             System.out.println();
         }
         Player player = new Player(pod.episodes.get(0).getMp3link());
+        player.play();
         Application.launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        VBox vBox = new VBox();
-        Scene s = new Scene(vBox,500,400);
+        VBox vBox = FXMLLoader.load(getClass().getResource("fxml/home.fxml"));
+        Scene s = new Scene(vBox,800,500);
+        primaryStage.setTitle("JPod");
         primaryStage.setScene(s);
         primaryStage.show();
     }

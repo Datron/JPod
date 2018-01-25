@@ -33,12 +33,11 @@ public class Player {
             @Override
             public void run() {
                 System.out.println("Duration:"+media.getDuration().toMinutes());
-                mediaPlayer.play();
             }
         });
     }
 
-    void play(){
+    synchronized void play(){
         mediaPlayer.play();
     }
     void forward(){
