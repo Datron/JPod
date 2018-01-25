@@ -1,5 +1,27 @@
 #sidebar {
     -fx-background-color: #424242;
+    -fx-padding: 10px;
+}
+Button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+}
+ToggleButton {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0px;
+}
+Slider {
+    -fx-pref-width: 800px;
+}
+#playerRowOne {
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+}
+#playerRowTwo {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
 }
 #home {
     -fx-background-color: #424242;
