@@ -14,7 +14,7 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException, InterruptedException {
         URL url = null;
         try {
-            url = new URL("https://www.npr.org/rss/podcast.php?id=510313");
+            url = new URL("https://rss.art19.com/masters-of-scale");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
