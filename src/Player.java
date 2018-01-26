@@ -13,7 +13,7 @@ public class Player {
     private Media media;
     private MediaPlayer mediaPlayer;
     private long position;
-    private boolean isPaused;
+    private boolean isPaused = true; //true is pause and false is play
 
 
     Player(String mp3url) throws IOException {
@@ -37,8 +37,15 @@ public class Player {
         });
     }
 
-    synchronized void play(){
-        mediaPlayer.play();
+    synchronized void playOrPause(){
+        if (!isPaused) {
+            mediaPlayer.pause();
+            isPaused = true;
+        }
+        else {
+                mediaPlayer.play();
+                isPaused = false;
+            }
     }
     void forward(){
 
