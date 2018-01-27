@@ -7,8 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.util.HashMap;
 
@@ -21,12 +23,19 @@ public class HomeController {
     @FXML
     ButtonBar playerRowOne;
     @FXML
-    ToggleButton home,search,download,queue;
+    ToggleButton home;
+    @FXML
+    AnchorPane mainParent;
+    @FXML
+    ToggleButton search;
+    @FXML
+    ToggleButton download;
+    @FXML
+    ToggleButton queue;
     @FXML
     VBox sidebar;
 
     private Scene scene;
-    HashMap<String, Pane> switcher = new HashMap<>(4);
     Label duration = new Label();
     ToggleButton playPause = new ToggleButton();
     Button next = (Button) new Button();
@@ -34,6 +43,27 @@ public class HomeController {
     Button forward = (Button) new Button();
     Button backward = (Button) new Button();
     Slider seek = (Slider) new Slider(); // and ye shall find
+
+
+    public AnchorPane getMainParent() {
+        return mainParent;
+    }
+
+    public ToggleButton getHome() {
+        return home;
+    }
+
+    public ToggleButton getSearch() {
+        return search;
+    }
+
+    public ToggleButton getDownload() {
+        return download;
+    }
+
+    public ToggleButton getQueue() {
+        return queue;
+    }
     @FXML
     public void initialize(){
         System.out.println("Controller initialized");
@@ -116,12 +146,6 @@ public class HomeController {
         search.setGraphic(imgSearchView);
         queue.setGraphic(imgDownloadView);
         download.setGraphic(imgQueueView);
-    }
-    public void addView(String name, Pane pane){
-        switcher.put(name,pane);
-    }
-    public Pane getView(String name){
-        return switcher.get(name);
     }
 
 }
