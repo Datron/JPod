@@ -72,6 +72,9 @@ public class HomeController {
         this.scene = scene;
     }
     public void setDimens(){
+        mainParent.prefWidthProperty().bind(scene.widthProperty().multiply(0.95));
+        mainParent.prefHeightProperty().bind(scene.heightProperty().multiply(0.8));
+        sidebar.prefWidthProperty().bind(scene.widthProperty().multiply(0.05));
         sidebar.prefHeightProperty().bind(scene.heightProperty().multiply(0.8));
         playerRowOne.prefHeightProperty().bind(scene.heightProperty().multiply(0.1));
         playerRowTwo.prefHeightProperty().bind(scene.heightProperty().multiply(0.2));

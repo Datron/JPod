@@ -29,6 +29,7 @@ public class Main extends Application {
     Player player;
     AnchorPane parent;
     ViewSwitcher switcher;
+    Pane oldPane = null;
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -91,7 +92,16 @@ public class Main extends Application {
     }
 
     private void switchView(String name) {
+       if (oldPane != null)
+            parent.getChildren().remove(oldPane);
        Pane p = switcher.getViews(name);
+       oldPane = p;
+       p.prefWidthProperty().bind(stage.getScene().widthProperty());
+       p.prefHeightProperty().bind(stage.getScene().heightProperty());
        parent.getChildren().add(p);
+       parent.setBottomAnchor(p, 0.0);
+       parent.setTopAnchor(p, 0.0);
+       parent.setLeftAnchor(p, 0.0);
+       parent.setRightAnchor(p, 0.0);
     }
 }

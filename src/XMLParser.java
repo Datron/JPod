@@ -7,6 +7,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class XMLParser {
             e.printStackTrace();
         }
     }
-    public Podcast getFeed() throws IOException {
+    public Podcast getFeed() throws IOException,ConnectException {
         InputStreamReader in = new InputStreamReader(urlConnection.getInputStream());
         BufferedReader br = new BufferedReader(in);
         String line;
