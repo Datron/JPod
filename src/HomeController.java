@@ -1,4 +1,3 @@
-package fxml;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;

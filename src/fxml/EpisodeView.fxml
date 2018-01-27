@@ -7,12 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.text.Text?>
+<AnchorPane fx:controller="EpisodeController" fx:id="mainParent" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-      <ListView layoutX="20.0" layoutY="198.0" prefHeight="177.0" prefWidth="556.0" />
-      <Button layoutX="232.0" layoutY="162.0" mnemonicParsing="false" text="Button" />
-      <Label layoutX="232.0" layoutY="41.0" prefHeight="26.0" prefWidth="276.0" text="Label" />
-      <Label layoutX="232.0" layoutY="83.0" prefHeight="73.0" prefWidth="306.0" text="Label" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" fx:id="image" />
+      <ListView layoutX="20.0" layoutY="198.0" prefHeight="177.0" prefWidth="556.0" fx:id="episode"/>
+      <Button layoutX="232.0" layoutY="162.0" mnemonicParsing="false" text="Subscribe" fx:id="subscribe" />
+      <Text layoutX="232.0" layoutY="41.0" text="Label" fx:id="podHeading" />
+      <Text layoutX="232.0" layoutY="83.0" text="Label" fx:id="podDescription" />
    </children>
 </AnchorPane>

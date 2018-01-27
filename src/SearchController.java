@@ -1,4 +1,3 @@
-package fxml;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

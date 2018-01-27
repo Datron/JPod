@@ -17,7 +17,7 @@ public class XMLParser {
     DocumentBuilder documentBuilder;
     Document doc;
     class Episodes {
-        String title,description,mp3link,duration,date;
+        private String title,description,mp3link,duration,date;
 
         public String getTitle() {
             return title;
@@ -61,8 +61,8 @@ public class XMLParser {
     }
     class Podcast {
         ArrayList<Episodes> episodes;
-        String podName;
-        int numberOfEpisodes;
+        private String podName;
+        private int numberOfEpisodes;
         Podcast(int numberOfEpisodes){
             this.numberOfEpisodes = numberOfEpisodes;
             episodes = new ArrayList<>(numberOfEpisodes);
@@ -83,9 +83,9 @@ public class XMLParser {
             this.image = image;
         }
 
-        String image;
-        String keywords;
-        String podDescription;
+        private String image;
+        private String keywords;
+        private String podDescription;
         public String getPodName() {
             return podName;
         }
