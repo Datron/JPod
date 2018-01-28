@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -55,7 +56,8 @@ public class EpisodeController {
     Button subscribe;
     @FXML
     public void initialize(){
-        episode.setStyle("-fx-background-color: transparent");
+        episode.setStyle("-fx-background-color: transparent;" +
+                "-fx-padding: 0px");
 //        podHeading.prefWidth(300);
         mainParent.setStyle("-fx-padding: 10px;");
         podHeading.setStyle("-fx-font-size: 30px");
@@ -102,7 +104,8 @@ public class EpisodeController {
     }
     public void configureSize(){
         if (!isDone) {
-            podDescription.wrappingWidthProperty().bind(mainParent.widthProperty().multiply(0.25));
+//            podDescription.setWrappingWidth(600);
+            podDescription.wrappingWidthProperty().bind(mainParent.widthProperty().multiply(0.28));
             episode.prefWidthProperty().bind(mainParent.widthProperty().multiply(0.96));
             episode.prefHeightProperty().bind(mainParent.heightProperty().multiply(0.65));
             isDone = true;

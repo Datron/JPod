@@ -3,6 +3,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -30,14 +31,16 @@ public class ListItemFactory {
         play.setText("play");
         Button add = (Button) pane.lookup("#add");
         add.setText("add...");
-        pane.setStyle("-fx-pref-height: 200px;");
+        pane.setStyle("-fx-pref-height: 200px;" +
+                "-fx-background-color: #00796B");
         VBox vBox = (VBox) pane.lookup("#vbox");
         Text head = (Text) pane.lookup("#heading");
-        head.setStyle("-fx-font-size: 20px");
+        head.setStyle("-fx-font-size: 20px;");
+        head.setFill(Color.WHITE);
         head.setText(heading);
         Text des = (Text) pane.lookup("#description");
         des.setText(description);
-        des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.35));
-        VBox.setVgrow(des, Priority.ALWAYS);
+        des.setFill(Color.WHITE);
+        des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.36));
     }
 }

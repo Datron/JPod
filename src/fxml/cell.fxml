@@ -12,7 +12,7 @@
        <VBox fx:id="vbox">
            <children>
                <Text layoutX="64.0" layoutY="20.0" text="Label" fx:id="heading"/>
-               <Text layoutX="23.0" layoutY="42.0"  fx:id="description"/>
+               <Text layoutX="23.0" layoutY="42.0" VBox.vgrow="ALWAYS"  fx:id="description"/>
                <Button layoutX="458.0" layoutY="29.0" mnemonicParsing="false" text="Button" fx:id="play" />
                <Button layoutX="522.0" layoutY="29.0" mnemonicParsing="false" text="Button" fx:id="add" />
 
