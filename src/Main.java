@@ -31,6 +31,9 @@ public class Main extends Application {
     Pane oldPane = null;
     HomeController controller;
     EpisodeController episodeController;
+    DatabaseAdapter db;
+
+
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -60,6 +63,7 @@ public class Main extends Application {
         ToggleButton search = controller.getSearch();
         parent = controller.getMainParent();
         play.setSelected(true);
+        db = new DatabaseAdapter("jpod.db");
         play.setOnMouseClicked(e -> player.playOrPause());
         home.setOnMouseClicked(e -> {
             switchView("home");

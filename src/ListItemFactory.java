@@ -32,15 +32,16 @@ public class ListItemFactory {
         Button add = (Button) pane.lookup("#add");
         add.setText("add...");
         pane.setStyle("-fx-pref-height: 200px;" +
-                "-fx-background-color: #00796B");
+//                "-fx-background-color: #00796B;" +
+                "-fx-padding: 20px");
         VBox vBox = (VBox) pane.lookup("#vbox");
         Text head = (Text) pane.lookup("#heading");
         head.setStyle("-fx-font-size: 20px;");
-        head.setFill(Color.WHITE);
+//        head.setFill(Color.WHITE);
         head.setText(heading);
         Text des = (Text) pane.lookup("#description");
         des.setText(description);
-        des.setFill(Color.WHITE);
+//        des.setFill(Color.WHITE);
         des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.36));
     }
 }
