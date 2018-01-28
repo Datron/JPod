@@ -21,7 +21,7 @@ import java.util.List;
 
 public class EpisodeController {
     XMLParser parser;
-
+    URL url;
     public void setParser(XMLParser parser) {
         this.parser = parser;
     }
@@ -63,7 +63,6 @@ public class EpisodeController {
         podHeading.setStyle("-fx-font-size: 30px");
         subscribe.setStyle("-fx-border-color: black;" +
                 "-fx-border-width: 2px;");
-        URL url = null;
         try {
             url = new URL("https://rss.art19.com/masters-of-scale");
         } catch (MalformedURLException e) {
@@ -101,6 +100,9 @@ public class EpisodeController {
         image.setImage(i);
         podHeading.setText(podcast.getPodName());
         podDescription.setText(podcast.getPodDescription());
+    }
+    public void loadEpisodes(){
+
     }
     public void configureSize(){
         if (!isDone) {

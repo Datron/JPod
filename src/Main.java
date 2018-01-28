@@ -75,7 +75,6 @@ public class Main extends Application {
         primaryStage.setScene(s);
         primaryStage.show();
     }
-
     private void switchView(String name) {
        if (oldPane != null)
             parent.getChildren().remove(oldPane);
