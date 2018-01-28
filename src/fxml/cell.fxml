@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane prefHeight="108.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+       <VBox fx:id="vbox">
+           <children>
+               <Text layoutX="64.0" layoutY="20.0" text="Label" fx:id="heading"/>
+               <Text layoutX="23.0" layoutY="42.0"  fx:id="description"/>
+               <Button layoutX="458.0" layoutY="29.0" mnemonicParsing="false" text="Button" fx:id="play" />
+               <Button layoutX="522.0" layoutY="29.0" mnemonicParsing="false" text="Button" fx:id="add" />
+
+           </children>
+       </VBox>
+
+   </children>
+</AnchorPane>

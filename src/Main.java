@@ -29,6 +29,8 @@ public class Main extends Application {
     AnchorPane parent;
     ViewSwitcher switcher;
     Pane oldPane = null;
+    HomeController controller;
+    EpisodeController episodeController;
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -43,8 +45,9 @@ public class Main extends Application {
         switcher = new ViewSwitcher();
         switcher.setViews("home",loader3.load());
         switcher.setViews("search",loader2.load());
-        HomeController controller = loader.getController();
-        EpisodeController episodeController = loader3.getController();
+        controller = loader.getController();
+        episodeController = loader3.getController();
+        episodeController.configureSize();
         Scene s = new Scene(vBox,1280,720);
         s.getStylesheets().add("css/main.css");
         controller.setScene(s);
@@ -74,7 +77,7 @@ public class Main extends Application {
             parent.getChildren().remove(oldPane);
        Pane p = switcher.getViews(name);
        oldPane = p;
-       p.prefWidthProperty().bind(stage.getScene().widthProperty());
+//       p.prefWidthProperty().bind(stage.getScene().widthProperty());
        p.prefHeightProperty().bind(stage.getScene().heightProperty());
        parent.getChildren().add(p);
        parent.setBottomAnchor(p, 0.0);
