@@ -36,12 +36,14 @@ public class ListItemFactory {
                 "-fx-padding: 20px");
         VBox vBox = (VBox) pane.lookup("#vbox");
         Text head = (Text) pane.lookup("#heading");
+        Text link = (Text) pane.lookup("#mp3link");
+        link.setText(mp3link);
         head.setStyle("-fx-font-size: 20px;");
 //        head.setFill(Color.WHITE);
         head.setText(heading);
         Text des = (Text) pane.lookup("#description");
         des.setText(description);
 //        des.setFill(Color.WHITE);
-        des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.7));
+        des.wrappingWidthProperty().bind(pane.widthProperty().divide(2.5));
     }
 }

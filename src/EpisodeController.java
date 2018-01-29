@@ -1,23 +1,21 @@
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EpisodeController {
     XMLParser parser;
@@ -34,7 +32,6 @@ public class EpisodeController {
     public void setParser(XMLParser parser) {
         this.parser = parser;
     }
-
     public Player getPlayer() {
         return player;
     }
@@ -99,11 +96,14 @@ public class EpisodeController {
             }
             ObservableList<AnchorPane> listItemFactories = FXCollections.observableList(al);
             episode.setItems(listItemFactories);
-            try {
-                player = new Player(podcast.episodes.get(0).getMp3link());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            episode.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    AnchorPane p = episode.getSelectionModel().getSelectedItem();
+                    System.out.println( ((Text) p.lookup("#mp3link")).getText());
+                    player.addPlayer(new MediaPlayer(new Media(((Text) p.lookup("#mp3link")).getText())));
+                }
+            });
             Image i = new Image(podcast.getImage());
             image.setImage(i);
             podHeading.setText(podcast.getPodName());
@@ -112,7 +112,7 @@ public class EpisodeController {
     public void configureSize(){
         if (!isDone) {
 //            podDescription.setWrappingWidth(600);
-            podDescription.wrappingWidthProperty().bind(mainParent.widthProperty().multiply(0.7));
+            podDescription.wrappingWidthProperty().bind(mainParent.widthProperty().multiply(0.4));
             episode.prefWidthProperty().bind(mainParent.widthProperty().multiply(0.96));
             episode.prefHeightProperty().bind(mainParent.heightProperty().multiply(0.65));
             isDone = true;

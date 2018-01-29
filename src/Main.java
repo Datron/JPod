@@ -8,6 +8,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaView;
 import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -29,6 +30,7 @@ class ViewSwitcher {
 public class Main extends Application {
     private Stage stage;
     private XMLParser.Podcast pod;
+    MediaView mediaView;
     Player player;
     AnchorPane parent;
     ViewSwitcher switcher;
@@ -63,12 +65,13 @@ public class Main extends Application {
         controller.setScene(s);
         controller.setDimens();
         controller.createToggleButtons();
-        player = episodeController.getPlayer();
         controller.configurePlayer(episodeController.podcast.episodes.get(0).getDuration());
         ToggleButton play = controller.getPlayPause();
         ToggleButton home = controller.getHome();
         ToggleButton search = controller.getSearch();
         parent = controller.getMainParent();
+        player = episodeController.getPlayer();
+        mediaView = new MediaView(player.mediaPlayer);
         play.setSelected(true);
         db = new DatabaseAdapter("jpod.db");
         play.setOnMouseClicked(e -> player.playOrPause());
@@ -121,7 +124,7 @@ public class Main extends Application {
                 }
                 else if (!(engine.getLocation().contains("listennotes"))){
                     System.out.println(engine.getLocation());
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, " " + engine.getLocation() + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "use the link " + engine.getLocation() + " ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
                     alert.showAndWait();
                     if (alert.getResult() == ButtonType.YES){
                         try {
@@ -132,7 +135,7 @@ public class Main extends Application {
                             e.printStackTrace();
                         }
                     }
-                    engine.load(prevUrl[0]);
+//                    engine.load(prevUrl[0]);
                 }
             }
         });

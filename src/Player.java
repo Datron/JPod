@@ -1,21 +1,28 @@
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 
 public class Player {
     private Media media;
-    private MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer;
     private long position;
     private boolean isPaused = true; //true is pause and false is play
-
-
+    ArrayList<MediaPlayer> playerArrayList = new ArrayList<>(10);
+    public void addPlayer(MediaPlayer track){
+        playerArrayList.add(track);
+    }
+    public MediaPlayer getMediaPlayer(){
+        return  playerArrayList.remove(0);
+    }
     Player(String mp3url) throws IOException {
         String url;
         HttpURLConnection conn =(HttpURLConnection) new URL(mp3url).openConnection();
@@ -47,13 +54,13 @@ public class Player {
                 isPaused = false;
             }
     }
+    void nextTrack(){
+
+    }
     void forward(){
 
     }
     void backward(){
-
-    }
-    void pause(){
 
     }
     void resume(){
@@ -62,4 +69,5 @@ public class Player {
     void goToPosition(){
 
     }
+
 }
