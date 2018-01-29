@@ -42,6 +42,6 @@ public class ListItemFactory {
         Text des = (Text) pane.lookup("#description");
         des.setText(description);
 //        des.setFill(Color.WHITE);
-        des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.36));
+        des.wrappingWidthProperty().bind(pane.widthProperty().multiply(0.7));
     }
 }
