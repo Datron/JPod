@@ -13,17 +13,22 @@ import java.util.regex.Pattern;
 
 public class Player {
     private Media media;
-    MediaPlayer mediaPlayer;
     private long position;
     private boolean isPaused = true; //true is pause and false is play
     ArrayList<MediaPlayer> playerArrayList = new ArrayList<>(10);
+    MediaView mediaView;
+    MediaPlayer oldPlayer;
+    Player(){
+        mediaView = new MediaView();
+    }
     public void addPlayer(MediaPlayer track){
         playerArrayList.add(track);
     }
     public MediaPlayer getMediaPlayer(){
         return  playerArrayList.remove(0);
     }
-    Player(String mp3url) throws IOException {
+
+    public MediaPlayer load(String mp3url) throws IOException {
         String url;
         HttpURLConnection conn =(HttpURLConnection) new URL(mp3url).openConnection();
         int rs = conn.getResponseCode();
@@ -35,27 +40,35 @@ public class Player {
             url = mp3url;
         System.out.println(url);
         media = new Media(url);
-        mediaPlayer = new MediaPlayer(media);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        if (oldPlayer != null){
+            oldPlayer.stop();
+        }
+        mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
                 System.out.println("Duration:"+media.getDuration().toMinutes());
             }
         });
+        return mediaPlayer;
     }
 
     synchronized void playOrPause(){
         if (!isPaused) {
-            mediaPlayer.pause();
+            oldPlayer = mediaView.getMediaPlayer();
+            mediaView.getMediaPlayer().pause();
             isPaused = true;
         }
         else {
-                mediaPlayer.play();
+                oldPlayer = mediaView.getMediaPlayer();
+                mediaView.getMediaPlayer().play();
                 isPaused = false;
             }
     }
     void nextTrack(){
-
+        System.out.println("No of tracks:"+playerArrayList.size());
+        mediaView.setMediaPlayer(playerArrayList.remove(0));
     }
     void forward(){
 

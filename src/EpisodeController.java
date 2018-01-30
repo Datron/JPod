@@ -27,7 +27,7 @@ public class EpisodeController {
 
     XMLParser.Podcast podcast;
     XMLParser.Episodes episodes;
-    Player player;
+    Player player = new Player();
     static boolean isDone = false;
     public void setParser(XMLParser parser) {
         this.parser = parser;
@@ -94,6 +94,7 @@ public class EpisodeController {
                 System.out.println();
                 al.add(ls.getPane());
             }
+
             ObservableList<AnchorPane> listItemFactories = FXCollections.observableList(al);
             episode.setItems(listItemFactories);
             episode.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -101,7 +102,12 @@ public class EpisodeController {
                 public void handle(MouseEvent event) {
                     AnchorPane p = episode.getSelectionModel().getSelectedItem();
                     System.out.println( ((Text) p.lookup("#mp3link")).getText());
-                    player.addPlayer(new MediaPlayer(new Media(((Text) p.lookup("#mp3link")).getText())));
+                    try {
+                        player.addPlayer(player.load(((Text) p.lookup("#mp3link")).getText()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    player.nextTrack();
                 }
             });
             Image i = new Image(podcast.getImage());

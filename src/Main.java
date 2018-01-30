@@ -30,7 +30,6 @@ class ViewSwitcher {
 public class Main extends Application {
     private Stage stage;
     private XMLParser.Podcast pod;
-    MediaView mediaView;
     Player player;
     AnchorPane parent;
     ViewSwitcher switcher;
@@ -71,7 +70,6 @@ public class Main extends Application {
         ToggleButton search = controller.getSearch();
         parent = controller.getMainParent();
         player = episodeController.getPlayer();
-        mediaView = new MediaView(player.mediaPlayer);
         play.setSelected(true);
         db = new DatabaseAdapter("jpod.db");
         play.setOnMouseClicked(e -> player.playOrPause());
