@@ -2,18 +2,19 @@ import javafx.application.Application;
 import javafx.concurrent.Worker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.MediaView;
 import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
-import java.io.IOException;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.HashMap;
 
 class ViewSwitcher {
@@ -53,6 +54,7 @@ public class Main extends Application {
         switcher = new ViewSwitcher();
         switcher.setViews("home",loader3.load());
         switcher.setViews("search",loader2.load());
+        db = new DatabaseAdapter("jpod.db");
         controller = loader.getController();
         episodeController = loader3.getController();
         searchController = loader2.getController();
@@ -69,9 +71,32 @@ public class Main extends Application {
         ToggleButton home = controller.getHome();
         ToggleButton search = controller.getSearch();
         parent = controller.getMainParent();
+        //load the subscribed tilePane
+        ResultSet rs = db.getSubcribedImages();
+        TilePane tile = new TilePane(3,3);
+        Button addFeed = new Button("Add feed");
+        addFeed.setStyle("-fx-border-color: black;" +
+                                "-fx-border-width: 2px;" +
+                                "-fx-padding: 3px");
+        parent.getChildren().add(addFeed);
+        if (rs != null) {
+            if (!(rs.next())) {
+                Label nothing = new Label("You have not subscribed to any podcasts");
+                tile.getChildren().add(nothing);
+            } else {
+                while (rs.next()) {
+                    ImageView newImage = new ImageView(new Image(rs.getString(rs.findColumn("image"))));
+                    tile.getChildren().add(newImage);
+                }
+            }
+        }
+        addFeed.setOnMouseClicked(event -> {
+
+        });
+        parent.getChildren().add(tile);
         player = episodeController.getPlayer();
         play.setSelected(true);
-        db = new DatabaseAdapter("jpod.db");
+
         play.setOnMouseClicked(e -> player.playOrPause());
         home.setOnMouseClicked(e -> {
             switchView("home");
@@ -79,6 +104,7 @@ public class Main extends Application {
         search.setOnMouseClicked(e -> {
             switchView("search");
         });
+        db.close();
         primaryStage.setTitle("JPod");
         primaryStage.setScene(s);
         primaryStage.show();

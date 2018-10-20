@@ -64,7 +64,8 @@ public class EpisodeController {
         mainParent.setStyle("-fx-padding: 10px;");
         podHeading.setStyle("-fx-font-size: 30px");
         subscribe.setStyle("-fx-border-color: black;" +
-                "-fx-border-width: 2px;");
+                "-fx-border-width: 2px;" +
+                "-fx-padding: 3px");
         try {
             setUrl(new URL("https://rss.art19.com/masters-of-scale"));
             loadEpisodes();
