@@ -1,4 +1,6 @@
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -27,29 +29,29 @@ public class Player {
     public MediaPlayer getMediaPlayer(){
         return  playerArrayList.remove(0);
     }
-
-    public MediaPlayer load(String mp3url) throws IOException {
-        String url;
-        HttpURLConnection conn =(HttpURLConnection) new URL(mp3url).openConnection();
+    public String openUrl(String url) throws IOException {
+        HttpURLConnection conn =(HttpURLConnection) new URL(url).openConnection();
+        System.out.println(conn);
         int rs = conn.getResponseCode();
-        System.out.println(rs);
-        if ( rs == 301 || rs == 302 || rs == 303 || rs == 307 || rs == 308) {
+        while ( rs == 301 || rs == 302 || rs == 303 || rs == 307 || rs == 308) {
             url = conn.getHeaderField("Location");
+            System.out.println("URL is "+url);
+            conn = (HttpURLConnection) new URL(url).openConnection();
+            rs = conn.getResponseCode();
         }
-        else
-            url = mp3url;
-        System.out.println(url);
+        return conn.getURL().toString();
+    }
+    public MediaPlayer load(String mp3url) throws IOException {
+        String url = openUrl(mp3url);
         media = new Media(url);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         if (oldPlayer != null){
             oldPlayer.stop();
         }
         mediaView.setMediaPlayer(mediaPlayer);
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Duration:"+media.getDuration().toMinutes());
-            }
+        mediaPlayer.setOnReady(() ->{
+            System.out.println("Media player is"+mediaPlayer.getStatus().toString()+", duration="+media.getDuration().toMinutes());
+            System.out.println("Duration:"+media.getDuration().toMinutes());
         });
         return mediaPlayer;
     }
@@ -69,6 +71,7 @@ public class Player {
     void nextTrack(){
         System.out.println("No of tracks:"+playerArrayList.size());
         mediaView.setMediaPlayer(playerArrayList.remove(0));
+
     }
     void forward(){
 

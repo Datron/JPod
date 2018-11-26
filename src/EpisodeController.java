@@ -87,29 +87,25 @@ public class EpisodeController {
             ArrayList<AnchorPane> al = new ArrayList<>(podcast.getNumberOfEpisodes());
             for (int i=0;i < podcast.getNumberOfEpisodes() ; i++) {
                 ListItemFactory ls = new ListItemFactory(podcast.episodes.get(i).getTitle(),podcast.episodes.get(i).getDescription(),podcast.episodes.get(i).getMp3link(),podcast.episodes.get(i).getDuration());
-                System.out.println("Episode Title:" + podcast.episodes.get(i).getTitle());
-                System.out.println("Episode Description:" + podcast.episodes.get(i).getDescription());
-                System.out.println("Episode Date:" + podcast.episodes.get(i).getDate());
-                System.out.println("Episode Duration:" + podcast.episodes.get(i).getDuration());
-                System.out.println("Episode Link:" + podcast.episodes.get(i).getMp3link());
-                System.out.println();
+//                System.out.println("Episode Title:" + podcast.episodes.get(i).getTitle());
+//                System.out.println("Episode Description:" + podcast.episodes.get(i).getDescription());
+//                System.out.println("Episode Date:" + podcast.episodes.get(i).getDate());
+//                System.out.println("Episode Duration:" + podcast.episodes.get(i).getDuration());
+//                System.out.println("Episode Link:" + podcast.episodes.get(i).getMp3link());
+//                System.out.println();
                 al.add(ls.getPane());
             }
 
             ObservableList<AnchorPane> listItemFactories = FXCollections.observableList(al);
             episode.setItems(listItemFactories);
-            episode.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    AnchorPane p = episode.getSelectionModel().getSelectedItem();
-                    System.out.println( ((Text) p.lookup("#mp3link")).getText());
-                    try {
-                        player.addPlayer(player.load(((Text) p.lookup("#mp3link")).getText()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    player.nextTrack();
+            episode.setOnMouseClicked(event -> {
+                AnchorPane p = episode.getSelectionModel().getSelectedItem();
+                try {
+                    player.addPlayer(player.load(((Text) p.lookup("#mp3link")).getText()));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                player.nextTrack();
             });
             Image i = new Image(podcast.getImage());
             image.setImage(i);
