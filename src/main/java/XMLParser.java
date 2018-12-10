@@ -1,3 +1,4 @@
+import com.sun.org.apache.xerces.internal.impl.io.MalformedByteSequenceException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -125,23 +126,20 @@ public class XMLParser {
         }
     }
     public Podcast getFeed() throws IOException,ConnectException {
-        InputStreamReader in = new InputStreamReader(urlConnection.getInputStream());
-        BufferedReader br = new BufferedReader(in);
-        String line;
-        String document = "";
-        while((line = br.readLine())!= null) {
-            document += line;
-        }
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             documentBuilder = factory.newDocumentBuilder();
-            doc = documentBuilder.parse(new ByteArrayInputStream(document.getBytes()));
+            doc = documentBuilder.parse(urlConnection.getURL().toString());
             doc.getDocumentElement().normalize();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
-         catch (SAXException e) {
+        catch (MalformedByteSequenceException e){
             e.printStackTrace();
+        }
+         catch (SAXException e) {
+             System.out.println("Error: "+e.getMessage());
         }
         NodeList item = doc.getElementsByTagName("item");
         Podcast pod = new Podcast(item.getLength());
@@ -178,8 +176,6 @@ public class XMLParser {
 //            +"Duration:"+e.getDuration());
 //            System.out.println();
         }
-        in.close();
-        br.close();
         return pod;
     }
 
